@@ -31,7 +31,7 @@ const HomeComponent = ({navigation}) => {
     fetch(apiGetProduct)
       .then(res => res.json())
       .then(resJson => {
-        setFoodsFromServer(resJson);
+        setFoodsFromServer(resJson.invoiceList);
       })
       .catch(error => {
         console.log('Error: ', error);

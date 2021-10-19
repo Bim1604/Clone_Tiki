@@ -25,6 +25,12 @@ const stylesItem = StyleSheet.create({
     fontWeight: '500',
     color: '#2a2a2a',
   },
+  btnAddCart: {
+    alignItems: "center",
+    backgroundColor: "red",
+    padding: 10,
+    color:'white'
+  },
 });
 
 export default stylesItem;
