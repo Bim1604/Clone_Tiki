@@ -30,7 +30,24 @@ const ProfileComponent = ({ navigation }) => {
          <Header title="Cá nhân" />
          <View style={styles.bodyContainer}>
             {
-               (userGoogleInfo === null) ?
+               (userGoogleInfo !== null) ?
+                  (
+                     <View>
+                        <View style={styles.userContainer}>
+                           <Avatar
+                              rounded
+                              size="medium"
+                              source={{
+                                 uri: userGoogleInfo.additionalUserInfo.profile.picture,
+                              }}
+                           />
+                           <View style={styles.textContainer}>
+                              <Text style={styles.welcomeText}>Chào mừng, {userGoogleInfo.additionalUserInfo.profile.name}</Text>
+                           </View>
+                        </View>
+                     </View>
+                  )
+                  :
                   (
                      <View style={styles.userContainer}>
                         <View style={styles.avatarContainer}>
@@ -48,23 +65,6 @@ const ProfileComponent = ({ navigation }) => {
                            </TouchableOpacity>
                         </View>
                         <FontAwesomeIcon icon={faAngleRight} size={26} color="#1e88e5" />
-                     </View>
-                  )
-                  :
-                  (
-                     <View>
-                        <View style={styles.userContainer}>
-                           <Avatar
-                              rounded
-                              size="medium"
-                              source={{
-                                 uri: userGoogleInfo.additionalUserInfo.profile.picture,
-                              }}
-                           />
-                           <View style={styles.textContainer}>
-                              <Text style={styles.welcomeText}>Chào mừng, {userGoogleInfo.additionalUserInfo.profile.name}</Text>
-                           </View>
-                        </View>
                      </View>
                   )
             }
