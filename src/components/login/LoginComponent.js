@@ -33,10 +33,10 @@ const LoginComponent = ({ navigation, route  }) => {
       // Sign-in the user with the credential
       await auth()
          .signInWithCredential(googleCredential)
-         .then(credential => {
+         .then(userInfo => {
             console.log('Signin success');
-            console.log(credential);
-            route.params.returnData(credential);
+            console.log(userInfo);
+            route.params.returnData(userInfo);
             navigation.goBack();
          })
          .catch(error => {
