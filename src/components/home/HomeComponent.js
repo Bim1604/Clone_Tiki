@@ -50,13 +50,15 @@ const HomeComponent = ({navigation}) => {
             <FontAwesomeIcon icon={faSearch} size={24} color="#969696" />
             <TextInput
               multiline
-              onChangeText={text => setSearchValue(text)}
+              onChangeText={text =>{
+                setSearchValue(text)
+              }}
               value={searchValue}
               style={stylesHome.default.inputText}
               placeholder="Bạn tìm gì hôm nay"
-              onPressIn={() => {
-                navigation.navigate('SearchComponent');
-              }}
+              // onPressIn={() => {
+              //   navigation.navigate('SearchComponent');
+              // }}
             />
           </View>
           <View style={stylesHome.default.cartContainer}>
