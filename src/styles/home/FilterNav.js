@@ -6,6 +6,25 @@ const stylesFilter = StyleSheet.create({
   filterContainer: {
     flexDirection: 'row',
     marginTop: 10,
+   },
+  filterImage:{
+    height:48,
+    width:48,
+    marginLeft:17
+    },
+  filterText:{
+      marginTop: 10,
+     textAlign: 'center'
+  },
+  filterDevider:{
+    height:8,
+     backgroundColor: '#ededed'
+  },
+  filterImageAndText:{
+    marginRight:30
+  },
+  filterContainText:{
+    width:85
   },
   filterActiveButtonContainer: {
     backgroundColor: '#242424',

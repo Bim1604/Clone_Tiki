@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   View,
   TextInput,
@@ -14,8 +14,10 @@ import {faSearch, faShoppingCart} from '@fortawesome/free-solid-svg-icons';
 import {FlatList} from 'react-native-gesture-handler';
 import {stylesHome, stylesItem, stylesFilter} from '../../styles/home/index';
 import renderItem from './ProductItem';
-import section_banner from '../../assets/image/Banner.png';
-import { apiGetProduct } from '../../assets/constant/api';
+import section_banner4 from '../../assets/image/Banner4.png';
+import section_banner3 from '../../assets/image/Banner3.png';
+import data, {utilities} from '../../assets/data/Homefile';
+import {apiGetProduct} from '../../assets/constant/api';
 
 const HomeComponent = ({navigation}) => {
   const [foodsFromServer, setFoodsFromServer] = useState([]);
@@ -40,7 +42,7 @@ const HomeComponent = ({navigation}) => {
   };
   return (
     <View>
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <StatusBar barStyle="light-content" />
         {/* Header */}
         <View style={stylesHome.default.headerContainer}>
@@ -64,49 +66,80 @@ const HomeComponent = ({navigation}) => {
         {/* Body */}
         <View style={stylesHome.default.bodyContainer}>
           <View style={stylesHome.default.sectionContainer}>
-            <Text style={stylesHome.default.sectionTitle}>Điện thoại - Máy Tính</Text>
-            <Image source={section_banner} style={stylesHome.default.sectionImage} />
-            <ScrollView horizontal={true}>
+            <Text style={stylesHome.default.sectionTitle}>
+              Quần Áo - Máy Tính
+            </Text>
+            <Image
+              source={section_banner4}
+              style={stylesHome.default.sectionImage}
+            />
+            <Image
+              source={section_banner3}
+              style={stylesHome.default.sectionImage}
+            />
+            <ScrollView
+              horizontal={true}
+               showsHorizontalScrollIndicator={false}>
               <View style={stylesFilter.default.filterContainer}>
-                {[
-                  'Tất cả',
-                  'Điện thoại SmartPhone',
-                  'Máy tính bảng',
-                  'Điện thoại',
-                ].map((e, index) => (
+                {data.map((value, index) => (
                   <View
-                    key={index.toString()}
-                    style={
-                      index === 0
-                        ? stylesFilter.default.filterActiveButtonContainer
-                        : stylesFilter.default.filterInactiveButtonContainer
-                    }>
-                    <Text
-                      style={
-                        index === 0
-                          ? stylesFilter.default.filterActiveText
-                          : stylesFilter.default.filterInactiveText
-                      }>
-                      {e}
-                    </Text>
+                    key={index}
+                    style={stylesFilter.default.filterImageAndText}>
+                    <Image
+                      source={value.image}
+                      style={stylesFilter.default.filterImage}
+                    />
+                    <View style={stylesFilter.default.filterContainText}>
+                      <Text style={stylesFilter.default.filterText}>
+                        {value.name}
+                      </Text>
+                    </View>
                   </View>
                 ))}
               </View>
             </ScrollView>
+            <View style={stylesFilter.default.filterDevider}></View>
+            <View>
+              <Text>Tiện ích</Text>
+            </View>
+            <ScrollView
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}>
+              <View style={stylesFilter.default.filterContainer}>
+                {utilities.map((value, index) => (
+                  <View
+                    key={index}
+                    style={stylesFilter.default.filterImageAndText}>
+                    <Image
+                      source={value.image}
+                      style={stylesFilter.default.filterImage}
+                    />
+                    <View style={stylesFilter.default.filterContainText}>
+                      <Text style={stylesFilter.default.filterText}>
+                        {value.name}
+                      </Text>
+                    </View>
+                  </View>
+                ))}
+              </View>
+            </ScrollView>
+            <View style={stylesFilter.default.filterDevider}></View>
             {isLoading ? (
               <ActivityIndicator />
             ) : (
               <View style={stylesItem.default.listItemContainer}>
                 <FlatList
                   horizontal={true}
-                  data={foodsFromServer}
+                   data={foodsFromServer}
                   renderItem={renderItem}
                   keyExtractor={item => `key-${item.id}`}
                 />
               </View>
             )}
             <View style={stylesHome.default.seeMoreContainer}>
-              <Text style={stylesHome.default.seeMoreText}>Xem thêm 500 Sản Phẩm</Text>
+              <Text style={stylesHome.default.seeMoreText}>
+                Xem thêm 500 Sản Phẩm
+              </Text>
             </View>
           </View>
         </View>

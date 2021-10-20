@@ -53,7 +53,9 @@ const stylesHome = StyleSheet.create({
     width: width - 24,
     height: 130,
     borderRadius: 4,
+    marginBottom:'3%',
   },
+
   // see more
   seeMoreContainer: {
     marginTop: 10,

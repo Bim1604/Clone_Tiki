@@ -6,7 +6,7 @@ import {stylesItem} from '../../styles/home/index';
 const ProductItem = ({image, name, price}) => {
   return (
     <View style={stylesItem.default.itemContainer}>
-      <Image source={image} style={stylesItem.default.itemImage} />
+      <Image resizeMode='contain' source={image} style={stylesItem.default.itemImage} />
       <Text style={stylesItem.default.itemName} numberOfLines={2}>
         {name}
       </Text>
@@ -19,8 +19,10 @@ let renderItem = ({item, index}) => {
   return (
     <View>
       <ProductItem
-        name={item.name}
-        image={{uri: item.thumbnailUrl}}
+        // name={item.name}
+        name={item.title}
+        // image={{uri: item.thumbnailUrl}}
+        image={{uri: item.image}}
         price={item.price + '$'}
       />
     </View>
