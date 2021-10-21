@@ -2,10 +2,25 @@
 import {Image, Text, View,Button} from 'react-native';
 import React from 'react';
 import {stylesItem} from '../../styles/home/index';
+import { useDispatch } from 'react-redux';
+import { addToCart } from "../../actions/cart";
 
-const ProductItem = ({image, name, price}) => {
-  const onPress = () =>  {
-    console.log("11")
+const ProductItem = ({image, name, price,id}) => {
+  const dispatch = useDispatch();
+  const onPress = (id) =>  {
+    console.log(id);
+    var postData = {
+      productId: id,
+      Quantiry: 1,
+
+   };
+   let axiosConfig = {
+      headers: {
+         'Content-Type': 'application/json;',
+         "Access-Control-Allow-Origin": "*",
+      }
+   };
+   dispatch(addToCart(postData, axiosConfig));
   };
   return (
     <View style={stylesItem.default.itemContainer}>
@@ -16,7 +31,7 @@ const ProductItem = ({image, name, price}) => {
       <Text style={stylesItem.default.itemPrice}>{price}</Text>
       <Button
         style={stylesItem.default.btnAddCart}
-        onPress={() => console.log("11")}
+        onPress={() => onPress(id)}
         title="Thêm"
 
       >
@@ -30,6 +45,7 @@ let renderItem = ({item, index}) => {
     <View>
       <ProductItem
         key={index}
+        id={item.id}
         name={item.name}
         image={{uri: item.image}}
         price={item.price + ' VND'}

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const url = 'https://api.pimo.studio/api/v1/auth'
+const url = 'http://api.pimo.studio/api/carts';
 
 export const getAllItems = () => axios.get(`${url}`);
 export const AddToCart = (postData, axiosConfig) => axios.post(url, postData, axiosConfig);

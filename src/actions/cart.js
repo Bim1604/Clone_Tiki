@@ -9,16 +9,16 @@ export const getAllItems = () => async (dispatch) => {
    }
 };
 
-export const AddToCart = (postData, axiosConfig) => async (dispatch) => {
-    try {
-       const { data } = await api.getAllItems(postData, axiosConfig);
-       dispatch({ type: 'ADD_TO_CART', payload: data });
-    } catch (error) {
-       console.log(error.message);
-    }
+export const addToCart = (postData, axiosConfig) => async (dispatch) => {
+   try {
+      const { data } = await api.AddToCart(postData, axiosConfig);
+      return { type: 'ADD_TO_CART', payload: data };
+   } catch (error) {
+      console.log(error.message);
+   }
  };
 
- export const RemoveFromCart = (id) => async (dispatch) => {
+ export const removeFromCart = (id) => async (dispatch) => {
     try {
        const { data } = await api.RemoveFromCart(id);
        dispatch({ type: 'REMOVE_FROM_CART', payload: data });

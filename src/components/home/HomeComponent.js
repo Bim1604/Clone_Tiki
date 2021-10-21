@@ -8,6 +8,7 @@ import {
   ScrollView,
   ActivityIndicator,
   StatusBar,
+  Pressable
 } from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faSearch, faShoppingCart} from '@fortawesome/free-solid-svg-icons';
@@ -16,12 +17,18 @@ import {stylesHome, stylesItem, stylesFilter} from '../../styles/home/index';
 import renderItem from './ProductItem';
 import section_banner from '../../assets/image/Banner.png';
 import { apiGetProduct } from '../../assets/constant/api';
+import ModalCart from "./ModalCart";
+import { useSelector } from 'react-redux';
+import { getAllItems } from "../../actions/cart";
+import { useDispatch } from 'react-redux';
 
 const HomeComponent = ({navigation}) => {
   const [foodsFromServer, setFoodsFromServer] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [searchValue, setSearchValue] = useState('');
-
+  const [modal, setModal] = useState(false);
+  const items = useSelector((state) => state.items);
+  const dispatch = useDispatch();
   useEffect(() => {
     getProduct();
     return () => {};
@@ -38,6 +45,10 @@ const HomeComponent = ({navigation}) => {
       })
       .finally(() => setIsLoading(false));
   };
+  const handleModal = () =>{
+    setModal(!modal);
+    dispatch(getAllItems());
+  }
   return (
     <View>
       <ScrollView>
@@ -58,9 +69,12 @@ const HomeComponent = ({navigation}) => {
             />
           </View>
           <View style={stylesHome.default.cartContainer}>
+          <Pressable onPress={handleModal}>
             <FontAwesomeIcon icon={faShoppingCart} size={24} color="#fff" />
+          </Pressable>
           </View>
         </View>
+        <ModalCart modal={modal} setModalVisible={setModal} items={items}/>
         {/* Body */}
         <View style={stylesHome.default.bodyContainer}>
           <View style={stylesHome.default.sectionContainer}>
