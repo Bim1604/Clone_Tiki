@@ -19,10 +19,8 @@ let renderItem = ({item, index}) => {
   return (
     <View>
       <ProductItem
-        // name={item.name}
-        name={item.title}
-        // image={{uri: item.thumbnailUrl}}
-        image={{uri: item.image}}
+         name={item.title}
+         image={{uri: item.image}}
         price={item.price + '$'}
       />
     </View>

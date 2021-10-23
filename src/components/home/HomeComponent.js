@@ -1,3 +1,4 @@
+/* eslint-disable react/self-closing-comp */
 /* eslint-disable prettier/prettier */
 import React, {useEffect, useState} from 'react';
 import {
@@ -43,22 +44,17 @@ const HomeComponent = ({navigation}) => {
   return (
     <View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <StatusBar barStyle="light-content" />
         {/* Header */}
         <View style={stylesHome.default.headerContainer}>
           <View style={stylesHome.default.inputContainer}>
             <FontAwesomeIcon icon={faSearch} size={24} color="#969696" />
             <TextInput
-              multiline
-              onChangeText={text =>{
+               onChangeText={text =>{
                 setSearchValue(text)
               }}
               value={searchValue}
               style={stylesHome.default.inputText}
               placeholder="Bạn tìm gì hôm nay"
-              // onPressIn={() => {
-              //   navigation.navigate('SearchComponent');
-              // }}
             />
           </View>
           <View style={stylesHome.default.cartContainer}>
@@ -69,7 +65,7 @@ const HomeComponent = ({navigation}) => {
         <View style={stylesHome.default.bodyContainer}>
           <View style={stylesHome.default.sectionContainer}>
             <Text style={stylesHome.default.sectionTitle}>
-              Quần Áo - Máy Tính
+              Quần Áo - <Text style={stylesHome.default.inner}>Máy Tính</Text>
             </Text>
             <Image
               source={section_banner4}
@@ -93,7 +89,7 @@ const HomeComponent = ({navigation}) => {
                     />
                     <View style={stylesFilter.default.filterContainText}>
                       <Text style={stylesFilter.default.filterText}>
-                        {value.name}
+                        {value.name} 
                       </Text>
                     </View>
                   </View>
@@ -127,7 +123,9 @@ const HomeComponent = ({navigation}) => {
             </ScrollView>
             <View style={stylesFilter.default.filterDevider}></View>
             {isLoading ? (
-              <ActivityIndicator />
+               <View style={[stylesItem.default.container , stylesItem.default.horizontal]}>        
+              <ActivityIndicator size="large" color="#0000ff" />
+             </View>
             ) : (
               <View style={stylesItem.default.listItemContainer}>
                 <FlatList

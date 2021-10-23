@@ -26,6 +26,9 @@ const stylesHome = StyleSheet.create({
     height: 40,
     width: width - 70,
   },
+  inner:{
+    color:'red'
+  },
   cartContainer: {
     paddingHorizontal: 20,
     alignItems: 'center',

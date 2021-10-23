@@ -1,8 +1,18 @@
+/* eslint-disable quotes */
 /* eslint-disable prettier/prettier */
 import {StyleSheet} from 'react-native';
 
 const stylesItem = StyleSheet.create({
   // Item
+  container: {
+    flex: 1,
+    justifyContent: "center"
+  },
+  horizontal: {
+    flexDirection: "row",
+    justifyContent: "space-around",
+    padding: 10
+  },
   listItemContainer: {
     flexDirection: 'row',
     marginTop: 20,
