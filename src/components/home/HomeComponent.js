@@ -1,28 +1,17 @@
-/* eslint-disable react/self-closing-comp */
 /* eslint-disable prettier/prettier */
 import React, {useEffect, useState} from 'react';
-import {
-  View,
-  TextInput,
-  Image,
-  Text,
-  ScrollView,
-  ActivityIndicator,
-  StatusBar,
-} from 'react-native';
+import {View, TextInput, Image, Text, ScrollView, Button} from 'react-native';
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome';
 import {faSearch, faShoppingCart} from '@fortawesome/free-solid-svg-icons';
 import {FlatList} from 'react-native-gesture-handler';
 import {stylesHome, stylesItem, stylesFilter} from '../../styles/home/index';
-import renderItem from './ProductItem';
 import section_banner4 from '../../assets/image/Banner4.png';
 import section_banner3 from '../../assets/image/Banner3.png';
 import data, {utilities} from '../../assets/data/Homefile';
 import {apiGetProduct} from '../../assets/constant/api';
-
-const HomeComponent = ({navigation}) => {
+import ProductItem from './ProductItem';
+const HomeComponent = ({navigation, route}) => {
   const [foodsFromServer, setFoodsFromServer] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [searchValue, setSearchValue] = useState('');
 
   useEffect(() => {
@@ -38,8 +27,20 @@ const HomeComponent = ({navigation}) => {
       })
       .catch(error => {
         console.log('Error: ', error);
-      })
-      .finally(() => setIsLoading(false));
+      });
+  };
+
+  let renderItem = ({item, index}) => {
+    return (
+      <View>
+        <ProductItem
+          navigation={navigation}
+          name={item.title}
+          image={{uri: item.image}}
+          price={item.price + '$'}
+        />
+      </View>
+    );
   };
   return (
     <View>
@@ -49,8 +50,8 @@ const HomeComponent = ({navigation}) => {
           <View style={stylesHome.default.inputContainer}>
             <FontAwesomeIcon icon={faSearch} size={24} color="#969696" />
             <TextInput
-               onChangeText={text =>{
-                setSearchValue(text)
+              onChangeText={text => {
+                setSearchValue(text);
               }}
               value={searchValue}
               style={stylesHome.default.inputText}
@@ -77,7 +78,7 @@ const HomeComponent = ({navigation}) => {
             />
             <ScrollView
               horizontal={true}
-               showsHorizontalScrollIndicator={false}>
+              showsHorizontalScrollIndicator={false}>
               <View style={stylesFilter.default.filterContainer}>
                 {data.map((value, index) => (
                   <View
@@ -89,14 +90,13 @@ const HomeComponent = ({navigation}) => {
                     />
                     <View style={stylesFilter.default.filterContainText}>
                       <Text style={stylesFilter.default.filterText}>
-                        {value.name} 
+                        {value.name}
                       </Text>
                     </View>
                   </View>
                 ))}
               </View>
             </ScrollView>
-            <View style={stylesFilter.default.filterDevider}></View>
             <View>
               <Text>Tiện ích</Text>
             </View>
@@ -121,21 +121,14 @@ const HomeComponent = ({navigation}) => {
                 ))}
               </View>
             </ScrollView>
-            <View style={stylesFilter.default.filterDevider}></View>
-            {isLoading ? (
-               <View style={[stylesItem.default.container , stylesItem.default.horizontal]}>        
-              <ActivityIndicator size="large" color="#0000ff" />
-             </View>
-            ) : (
-              <View style={stylesItem.default.listItemContainer}>
-                <FlatList
-                  horizontal={true}
-                   data={foodsFromServer}
-                  renderItem={renderItem}
-                  keyExtractor={item => `key-${item.id}`}
-                />
-              </View>
-            )}
+            <View style={stylesItem.default.listItemContainer}>
+              <FlatList
+                horizontal={true}
+                data={foodsFromServer}
+                renderItem={renderItem}
+                keyExtractor={item => `key-${item.id}`}
+              />
+            </View>
             <View style={stylesHome.default.seeMoreContainer}>
               <Text style={stylesHome.default.seeMoreText}>
                 Xem thêm 500 Sản Phẩm
